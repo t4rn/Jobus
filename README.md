@@ -1,2 +1,9 @@
 # Jobus
-ASP.NET Core + EF Code First + Npgsql + NLog
+
+### Tech stack:
+* ASP.NET Core
+* EF Code First
+* Npgsql
+* IMemoryCache
+* NLog
+* Swashbuckle (Swagger)
