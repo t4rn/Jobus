@@ -32,6 +32,7 @@ namespace Jobus.Api.Middleware
                 if (string.IsNullOrWhiteSpace(hashFromHeader))
                 {
                     // no authorization header
+                    _logger.LogDebug($"No hash provided...");
                     context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                     return;
                 }

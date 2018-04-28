@@ -1,10 +1,9 @@
-﻿using Jobus.Api.Middleware;
-using Jobus.Core.Repositories.WsClient;
-using Jobus.Core.Services.Cache;
-using Jobus.Core.Services.WsClients;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Jobus.Api.Autofac;
+using Jobus.Api.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -20,15 +19,11 @@ namespace Jobus.Api
         }
 
         public IConfiguration Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<IWsClientService, WsClientService>();
-            services.AddScoped<ICacheService, CacheService>();
-            services.AddScoped<IWsClientRepository, WsClientRepository>();
 
             // Swagger
             services.AddSwaggerGen(options =>
@@ -44,7 +39,13 @@ namespace Jobus.Api
                 });
             });
 
-            RegisterTypes(services);
+            // Autofac
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterModule(new AutofacModule());
+            ApplicationContainer = builder.Build();
+
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -65,12 +66,6 @@ namespace Jobus.Api
             app.UseMiddleware<LogRequestResponseMiddleware>();
 
             app.UseMvc();
-        }
-
-        private void RegisterTypes(IServiceCollection services)
-        {
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
         }
     }
 }

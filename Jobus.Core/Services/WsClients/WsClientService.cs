@@ -18,9 +18,12 @@ namespace Jobus.Core.Services.WsClients
             _wsClientRepository = wsClientRepository;
         }
 
-        public Task<IEnumerable<WsClient>> GetWsClientsAsync(bool includeGhosts = false)
+        public async Task<IEnumerable<WsClient>> GetWsClientsAsync(bool includeGhosts = false)
         {
             // search in cache
+
+            // TODO: temp solution
+            return await Task.FromResult(new List<WsClient> { new WsClient { Hash = "abc" } });
 
             // not in cache -> get from db
             throw new NotImplementedException();
