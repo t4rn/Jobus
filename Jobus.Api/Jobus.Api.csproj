@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Jobus.Common\Jobus.Common.csproj" />
     <ProjectReference Include="..\Jobus.Core\Jobus.Core.csproj" />
+    <ProjectReference Include="..\Jobus.Domain\Jobus.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

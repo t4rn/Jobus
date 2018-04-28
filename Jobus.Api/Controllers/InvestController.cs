@@ -22,6 +22,7 @@ namespace Jobus.Api.Controllers
         }
 
         [HttpGet("")]
+        [ProducesResponseType(typeof(string), 200)]
         public IActionResult Ping()
         {
             _logger.LogDebug($"{LogDescription()} Ping START");
@@ -29,6 +30,7 @@ namespace Jobus.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
         public string Get(int id)
         {
             return $"You've sent value = '{id}.";
