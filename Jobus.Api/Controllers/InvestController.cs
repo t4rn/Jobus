@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Jobus.Core.Services.WsClients;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,8 +16,9 @@ namespace Jobus.Api.Controllers
     {
         private readonly ILogger _logger;
 
-        public InvestController(ILogger<InvestController> logger, IActionContextAccessor actionContextAccessor)
-            : base(actionContextAccessor)
+        public InvestController(ILogger<InvestController> logger, IActionContextAccessor actionContextAccessor,
+            IWsClientService wsClientService)
+            : base(actionContextAccessor, wsClientService)
         {
             _logger = logger;
         }

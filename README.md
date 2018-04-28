@@ -6,5 +6,9 @@
 * EF Code First
 * Npgsql
 * IMemoryCache
+* xUnit
+* Moq
+* AutoFixture
+* FluentAssertions
 * NLog
 * Swashbuckle (Swagger)
