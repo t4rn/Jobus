@@ -3,6 +3,7 @@
 ### Tech stack:
 * ASP.NET Core
 * Autofac
+* AutoMapper
 * EF Code First
 * Npgsql
 * IMemoryCache
