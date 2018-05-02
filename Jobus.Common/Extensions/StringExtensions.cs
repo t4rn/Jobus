@@ -20,5 +20,10 @@ namespace Jobus.Common.Extensions
 
             return str;
         }
+
+        public static bool HasCertainLength(this string str, int from, int to)
+        {
+            return str.Length >= from && str.Length <= to;
+        }
     }
 }

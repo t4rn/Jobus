@@ -19,5 +19,14 @@ namespace Jobus.Common.Extensions
             return false;
         }
 
+        public static IEnumerable<T> DefaultIfNull<T>(this IEnumerable<T> source)
+        {
+            return source ?? Enumerable.Empty<T>();
+        }
+
+        public static bool AnyExists<T>(this IEnumerable<T> source)
+        {
+            return source != null && source.Any();
+        }
     }
 }

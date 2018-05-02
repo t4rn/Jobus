@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jobus.Core.Services.Cache
+﻿namespace Jobus.Core.Services.Cache
 {
     public interface ICacheService
     {
-        
+        T Get<T>(string key);
+        void Set<T>(string key, T obj, double secondsInCache = 60);
     }
 }
