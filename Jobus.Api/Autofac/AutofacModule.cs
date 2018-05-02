@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Jobus.Core.Repositories.WsClient;
+using Jobus.Core.Repositories.WsClients;
 using Jobus.Core.Services.Cache;
 using Jobus.Core.Services.WsClients;
 using Microsoft.AspNetCore.Mvc.Infrastructure;

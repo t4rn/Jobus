@@ -1,7 +1,6 @@
-﻿using Jobus.Core.Repositories.WsClient;
+﻿using Jobus.Core.Repositories.WsClients;
 using Jobus.Core.Services.Cache;
 using Jobus.Domain;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,13 +19,19 @@ namespace Jobus.Core.Services.WsClients
 
         public async Task<IEnumerable<WsClient>> GetWsClientsAsync(bool includeGhosts = false)
         {
+            string cacheKey = "wsClients";
+            
             // search in cache
+            IEnumerable<WsClient> wsClients = _cacheService.Get<IEnumerable<WsClient>>(cacheKey);
 
-            // TODO: temp solution
-            return await Task.FromResult(new List<WsClient> { new WsClient { Hash = "abc" } });
+            if (wsClients == null)
+            {
+                // get from db
+                wsClients = await _wsClientRepository.GetAllAsync(includeGhosts);
+                _cacheService.Set(cacheKey, wsClients);
+            }
 
-            // not in cache -> get from db
-            throw new NotImplementedException();
+            return wsClients;
         }
     }
 }

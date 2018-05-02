@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobus.Common", "Jobus.Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobus.Domain", "Jobus.Domain\Jobus.Domain.csproj", "{7201F63B-1713-4D92-8587-C45F487ABC91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobus.Tests", "Jobus.Tests\Jobus.Tests.csproj", "{754A2C18-A61C-4961-8ED7-71E909F6A71D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobus.Tests", "Jobus.Tests\Jobus.Tests.csproj", "{754A2C18-A61C-4961-8ED7-71E909F6A71D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{14CF9F1F-F826-4D02-B0F8-4AA36CC38EF9}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\db_init.sql = SQL\db_init.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,8 +2,10 @@
 using Autofac.Extensions.DependencyInjection;
 using Jobus.Api.Autofac;
 using Jobus.Api.Middleware;
+using Jobus.Core.Repositories.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -24,6 +26,10 @@ namespace Jobus.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            // EF
+            string connectionString = Configuration.GetConnectionString("cs");
+            services.AddEntityFrameworkNpgsql().AddDbContext<JobusDbContext>(options => options.UseNpgsql(connectionString));
 
             // Swagger
             services.AddSwaggerGen(options =>
