@@ -1,10 +1,5 @@
 ﻿using Jobus.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jobus.Core.Repositories.Contexts
 {
@@ -16,5 +11,11 @@ namespace Jobus.Core.Repositories.Contexts
         }
 
         public DbSet<WsClient> WsClients { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new WsClientConfiguration());
+        }
     }
 }
