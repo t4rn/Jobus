@@ -1,4 +1,5 @@
-﻿using Jobus.Domain;
+﻿using Jobus.Core.Repositories.Contexts.TypeConfigurations;
+using Jobus.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jobus.Core.Repositories.Contexts
@@ -15,7 +16,13 @@ namespace Jobus.Core.Repositories.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("public");
             modelBuilder.ApplyConfiguration(new WsClientConfiguration());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

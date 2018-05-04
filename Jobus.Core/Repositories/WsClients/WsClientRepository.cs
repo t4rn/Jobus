@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Jobus.Core.Repositories.Contexts;
+﻿using Jobus.Core.Repositories.Contexts;
 using Jobus.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Jobus.Core.Repositories.WsClients
 {
@@ -20,8 +18,16 @@ namespace Jobus.Core.Repositories.WsClients
 
         public async Task<IEnumerable<WsClient>> GetAllAsync(bool includeGhosts = false)
         {
-            // TODO: includeGhosts
-            return await _jobusDbContext.WsClients.ToListAsync();
+            IQueryable<WsClient> query = _jobusDbContext.WsClients.AsNoTracking();
+
+            if (!includeGhosts)
+            {
+                query = query.Where(x => x.Ghost == false);
+            }
+
+            IEnumerable<WsClient> wsClients = await query.ToListAsync();
+
+            return wsClients;
         }
     }
 }
