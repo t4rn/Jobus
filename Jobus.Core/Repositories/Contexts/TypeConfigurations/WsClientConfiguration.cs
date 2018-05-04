@@ -8,19 +8,20 @@ namespace Jobus.Core.Repositories.Contexts.TypeConfigurations
     {
         public void Configure(EntityTypeBuilder<WsClient> builder)
         {
-            builder.ToTable("wsClients");
-            builder.HasIndex(wsClient => wsClient.Hash).IsUnique();
-            builder.HasIndex(wsClient => wsClient.Name).IsUnique();
+            //builder.ToTable("ws_clients"); <- set in JobusDbConext by SnakeCase
 
-            builder.Property(wsClient => wsClient.Hash)
-                    .HasColumnName("hash")
-                    .HasMaxLength(16)
-                    .IsRequired();
+            builder.HasKey(x => x.Id);
 
-            builder.Property(wsClient => wsClient.Name)
-                .HasColumnName("clientName")
-                .HasMaxLength(32)
-                .IsRequired();
+            builder.Property(x => x.Hash).HasMaxLength(16).IsRequired();
+            builder.HasIndex(x => x.Hash).IsUnique();
+
+            builder.Property(x => x.Name).HasMaxLength(32).IsRequired();
+            builder.HasIndex(x => x.Name).IsUnique();
+
+            builder.Property(x => x.Ghost).IsRequired();
+            builder.Property(x => x.AddDate).HasDefaultValueSql("now()");
+
+            builder.ForNpgsqlHasComment("Table with api clients");
         }
     }
 }
