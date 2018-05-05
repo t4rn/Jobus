@@ -17,7 +17,7 @@ namespace Jobus.Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("public")
+                .HasDefaultSchema("jobus")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
@@ -42,7 +42,7 @@ namespace Jobus.Core.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("name")
+                        .HasColumnName("client_name")
                         .HasMaxLength(32);
 
                     b.HasKey("Id")
@@ -50,11 +50,11 @@ namespace Jobus.Core.Migrations
 
                     b.HasIndex("Hash")
                         .IsUnique()
-                        .HasName("ix_ws_clients_hash");
+                        .HasName("ws_clients_hash_unique");
 
                     b.HasIndex("Name")
                         .IsUnique()
-                        .HasName("ix_ws_clients_name");
+                        .HasName("ws_clients_name_unique");
 
                     b.ToTable("ws_clients");
 

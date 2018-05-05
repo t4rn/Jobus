@@ -26,6 +26,7 @@ namespace Jobus.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            //services.AddMemoryCache(); <- indirectly added with services.AddMvc()
 
             // EF
             string connectionString = Configuration.GetConnectionString("cs");

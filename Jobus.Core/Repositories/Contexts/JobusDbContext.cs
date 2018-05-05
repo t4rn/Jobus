@@ -21,7 +21,7 @@ namespace Jobus.Core.Repositories.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("public");
+            modelBuilder.HasDefaultSchema("jobus");
             modelBuilder.ApplyConfiguration(new WsClientConfiguration());
             //FixSnakeCaseNames(modelBuilder);
             SetSnakeCase(modelBuilder);
@@ -41,7 +41,7 @@ namespace Jobus.Core.Repositories.Contexts
 
                 // Replace column names
                 foreach (var property in entity.GetProperties())
-                    property.Relational().ColumnName = property.Name.ToSnakeCase();
+                    property.Relational().ColumnName = property.Relational().ColumnName.ToSnakeCase();// property.Name.ToSnakeCase();
 
                 foreach (var key in entity.GetKeys())
                     key.Relational().Name = key.Relational().Name.ToSnakeCase();
