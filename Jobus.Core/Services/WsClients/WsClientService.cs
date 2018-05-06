@@ -2,6 +2,7 @@
 using Jobus.Core.Services.Cache;
 using Jobus.Domain;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Jobus.Core.Services.WsClients
@@ -32,6 +33,15 @@ namespace Jobus.Core.Services.WsClients
             }
 
             return wsClients;
+        }
+
+        public async Task<bool> IsHashCorrectAsync(string hash)
+        {
+            IEnumerable<WsClient> wsClients = await GetWsClientsAsync();
+
+            bool isHashCorrect = wsClients.Any(x => x.Hash == hash);
+
+            return isHashCorrect;
         }
     }
 }

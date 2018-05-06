@@ -35,6 +35,9 @@ namespace Jobus.Api.Controllers
         [ProducesResponseType(typeof(string), 200)]
         public string Get(int id)
         {
+
+            // TODO: authorize WsClient vs controller method
+            // TODO: log errors to DB
             return $"You've sent value = '{id}.";
         }
     }

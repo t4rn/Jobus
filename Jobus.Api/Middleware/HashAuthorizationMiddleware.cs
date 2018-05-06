@@ -1,11 +1,7 @@
-﻿using Jobus.Common.Results;
-using Jobus.Core.Services.WsClients;
-using Jobus.Domain;
+﻿using Jobus.Core.Services.WsClients;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Jobus.Api.Middleware
@@ -39,9 +35,9 @@ namespace Jobus.Api.Middleware
                 else
                 {
                     // validating hash
-                    Result validationResult = await ValidateHash(hashFromHeader);
+                    bool isHashCorrect = await _wsClientService.IsHashCorrectAsync(hashFromHeader);
 
-                    if (validationResult.IsOk)
+                    if (isHashCorrect)
                     {
                         await _next(context);
                     }
@@ -61,18 +57,6 @@ namespace Jobus.Api.Middleware
 
                 return;
             }
-        }
-
-        private async Task<Result> ValidateHash(string hashFromHeader)
-        {
-            Result result = new Result();
-
-            IEnumerable<WsClient> wsClients = await _wsClientService.GetWsClientsAsync();
-
-            if (wsClients.Any(x => x.Hash == hashFromHeader))
-                result.IsOk = true;
-
-            return result;
         }
     }
 
