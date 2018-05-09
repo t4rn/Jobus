@@ -163,7 +163,7 @@ namespace Jobus.Common.Extensions
             Result result = new Result();
 
             long tempOutVar;
-            if (instance == null || instance.Length.IsOneOf(9, 14))
+            if (instance == null || !instance.Length.IsOneOf(9, 14))
             {
                 result.Message = "Regon has incorrect length";
             }
