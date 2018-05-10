@@ -1,4 +1,5 @@
-﻿CREATE ROLE jobus_dev_user LOGIN
+﻿-- password: jobusDevPasswd
+CREATE ROLE jobus_user LOGIN
   NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 
-  CREATE DATABASE jobus_dev WITH OWNER = jobus_dev_user;
+  CREATE DATABASE jobus_dev WITH OWNER = jobus_user;
