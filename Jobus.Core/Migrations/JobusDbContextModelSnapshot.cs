@@ -33,7 +33,9 @@ namespace Jobus.Core.Migrations
                         .HasDefaultValueSql("now()");
 
                     b.Property<bool>("Ghost")
-                        .HasColumnName("ghost");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ghost")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Hash")
                         .IsRequired()

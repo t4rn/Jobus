@@ -18,7 +18,7 @@ namespace Jobus.Core.Repositories.Contexts.TypeConfigurations
             builder.Property(x => x.Name).HasColumnName("client_name").HasMaxLength(32).IsRequired();
             builder.HasIndex(x => x.Name).IsUnique().HasName("ws_clients_name_unique");
 
-            builder.Property(x => x.Ghost).IsRequired();
+            builder.Property(x => x.Ghost).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.AddDate).HasDefaultValueSql("now()");
 
             builder.ForNpgsqlHasComment("Table with api clients");

@@ -25,7 +25,10 @@ namespace Jobus.Api
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(AuthorizationFilter));
+            });
             //services.AddMemoryCache(); <- indirectly added with services.AddMvc()
 
             // EF
@@ -69,7 +72,7 @@ namespace Jobus.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseMiddleware<HashAuthorizationMiddleware>();
+            //app.UseMiddleware<HashAuthorizationMiddleware>();
             app.UseMiddleware<LogRequestResponseMiddleware>();
 
             app.UseMvc();

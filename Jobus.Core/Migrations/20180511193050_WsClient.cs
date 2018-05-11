@@ -21,7 +21,7 @@ namespace Jobus.Core.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     client_name = table.Column<string>(maxLength: 32, nullable: false),
                     hash = table.Column<string>(maxLength: 16, nullable: false),
-                    ghost = table.Column<bool>(nullable: false),
+                    ghost = table.Column<bool>(nullable: false, defaultValue: false),
                     add_date = table.Column<DateTime>(nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>

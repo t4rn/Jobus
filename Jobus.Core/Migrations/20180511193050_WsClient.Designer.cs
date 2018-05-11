@@ -11,7 +11,7 @@ using System;
 namespace Jobus.Core.Migrations
 {
     [DbContext(typeof(JobusDbContext))]
-    [Migration("20180505171646_WsClient")]
+    [Migration("20180511193050_WsClient")]
     partial class WsClient
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,9 @@ namespace Jobus.Core.Migrations
                         .HasDefaultValueSql("now()");
 
                     b.Property<bool>("Ghost")
-                        .HasColumnName("ghost");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ghost")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Hash")
                         .IsRequired()
