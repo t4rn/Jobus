@@ -1,6 +1,6 @@
 ﻿using Jobus.Common.Extensions;
-using Jobus.DataAccess.TypeConfigurations;
 using Jobus.DataAccess.TypeConfigurations.Dictionaries;
+using Jobus.DataAccess.TypeConfigurations.Jobs;
 using Jobus.DataAccess.TypeConfigurations.WsClients;
 using Jobus.Domain.Jobs;
 using Jobus.Domain.WsClients;
@@ -35,8 +35,8 @@ namespace Jobus.DataAccess.Contexts
             modelBuilder.ApplyConfiguration(new JobStatusConfiguration());
             modelBuilder.ApplyConfiguration(new JobTypeConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new JobConfiguration());
-            //modelBuilder.ApplyConfiguration(new JobQueueConfiguration());
+            modelBuilder.ApplyConfiguration(new JobConfiguration());
+            modelBuilder.ApplyConfiguration(new JobQueueConfiguration());
             //FixSnakeCaseNames(modelBuilder); <- longer version
             SetSnakeCase(modelBuilder);
         }

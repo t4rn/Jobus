@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jobus.Domain.Jobs;
+using System;
 using System.Collections.Generic;
 
 namespace Jobus.Domain.WsClients
@@ -12,5 +13,6 @@ namespace Jobus.Domain.WsClients
         public DateTime AddDate { get; set; }
 
         public IEnumerable<WsClientResource> ClientsResources { get; set; }
+        public IEnumerable<Job> Jobs { get; set; }
     }
 }
