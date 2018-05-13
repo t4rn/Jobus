@@ -18,7 +18,9 @@ namespace Jobus.DataAccess.Repositories
 
         public async Task<IEnumerable<WsClient>> GetAllAsync(bool includeGhosts = false)
         {
-            IQueryable<WsClient> query = _jobusDbContext.WsClients.AsNoTracking();
+            IQueryable<WsClient> query = _jobusDbContext.WsClients.AsNoTracking()
+                .Include(ws => ws.ClientsResources)
+                .ThenInclude(cr => cr.Resource);
 
             if (!includeGhosts)
             {

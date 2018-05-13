@@ -21,6 +21,8 @@ namespace Jobus.DataAccess.TypeConfigurations
             builder.Property(x => x.Ghost).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.AddDate).HasDefaultValueSql("now()");
 
+            builder.HasMany(x => x.ClientsResources);
+
             builder.ForNpgsqlHasComment("Table with api clients");
         }
     }

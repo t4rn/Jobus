@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Jobus.Domain.WsClients
 {
@@ -9,5 +10,7 @@ namespace Jobus.Domain.WsClients
         public string Hash { get; set; }
         public bool Ghost { get; set; }
         public DateTime AddDate { get; set; }
+
+        public IEnumerable<WsClientResource> ClientsResources { get; set; }
     }
 }

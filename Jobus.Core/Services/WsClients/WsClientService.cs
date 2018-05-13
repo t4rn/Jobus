@@ -1,6 +1,8 @@
-﻿using Jobus.Core.Services.Cache;
+﻿using Jobus.Common.Results;
+using Jobus.Core.Services.Cache;
 using Jobus.DataAccess.Repositories;
 using Jobus.Domain.WsClients;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace Jobus.Core.Services.WsClients
         public async Task<IEnumerable<WsClient>> GetWsClientsAsync(bool includeGhosts = false)
         {
             string cacheKey = "wsClients";
-            
+
             // search in cache
             IEnumerable<WsClient> wsClients = _cacheService.Get<IEnumerable<WsClient>>(cacheKey);
 
@@ -35,13 +37,29 @@ namespace Jobus.Core.Services.WsClients
             return wsClients;
         }
 
-        public async Task<bool> IsHashCorrectAsync(string hash)
+        public async Task<Result> AuthorizeAsync(string hash, string controllerName, string actionName)
         {
+            Result result = new Result();
             IEnumerable<WsClient> wsClients = await GetWsClientsAsync();
 
-            bool isHashCorrect = wsClients.Any(x => x.Hash == hash);
+            WsClient foundWsClient = wsClients.FirstOrDefault(x => x.Hash == hash);
 
-            return isHashCorrect;
+            if (foundWsClient == null)
+            {
+                result.Message = $"Incorrect hash '{hash}'.";
+            }
+            else if (!foundWsClient.ClientsResources.Any(cr =>
+                cr.Resource.Controller.Equals(controllerName, StringComparison.InvariantCultureIgnoreCase) &&
+                cr.Resource.Action.Equals(actionName, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                result.Message = $"Client '{foundWsClient.Name}' unauthorized for Action '{actionName}' in Controller '{controllerName}'.";
+            }
+            else
+            {
+                result.IsOk = true;
+            }
+
+            return result;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Jobus.Api.Autofac;
+using Jobus.Api.Filters;
 using Jobus.Api.Middleware;
 using Jobus.DataAccess.Contexts;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +28,7 @@ namespace Jobus.Api
         {
             services.AddMvc(options =>
             {
-                options.Filters.Add(typeof(AuthorizationFilter));
+                options.Filters.Add(typeof(HashAuthorizationFilter));
             });
             //services.AddMemoryCache(); <- indirectly added with services.AddMvc()
 

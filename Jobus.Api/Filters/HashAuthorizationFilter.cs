@@ -1,4 +1,5 @@
-﻿using Jobus.Core.Services.WsClients;
+﻿using Jobus.Common.Results;
+using Jobus.Core.Services.WsClients;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -7,14 +8,14 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Jobus.Api.Middleware
+namespace Jobus.Api.Filters
 {
-    public class AuthorizationFilter : IAsyncAuthorizationFilter
+    public class HashAuthorizationFilter : IAsyncAuthorizationFilter
     {
-        private readonly ILogger<AuthorizationFilter> _logger;
+        private readonly ILogger<HashAuthorizationFilter> _logger;
         private readonly IWsClientService _wsClientService;
 
-        public AuthorizationFilter(ILogger<AuthorizationFilter> logger,
+        public HashAuthorizationFilter(ILogger<HashAuthorizationFilter> logger,
             IWsClientService wsClientService)
         {
             _logger = logger;
@@ -43,15 +44,14 @@ namespace Jobus.Api.Middleware
                 else
                 {
                     // validating hash
-                    bool isHashCorrect = await _wsClientService.IsHashCorrectAsync(hashFromHeader);
+                    Result validationResult = await _wsClientService.AuthorizeAsync(hashFromHeader, controllerName, actionName);
 
-                    if (!isHashCorrect)
+                    if (!validationResult.IsOk)
                     {
-                        // bad hash
-                        _logger.LogDebug($"Auth failed for hash: '{hashFromHeader}'");
+                        _logger.LogDebug($"Auth failed -> {validationResult.Message}");
                         context.Result = new ContentResult()
                         {
-                            Content = $"Hash '{hashFromHeader}' is unauthorized for Action '{actionName}' in Controller '{controllerName}'.",
+                            Content = validationResult.Message,
                             StatusCode = StatusCodes.Status401Unauthorized,
                         };
                     }

@@ -23,6 +23,8 @@ namespace Jobus.DataAccess.Contexts
         {
             modelBuilder.HasDefaultSchema("jobus");
             modelBuilder.ApplyConfiguration(new WsClientConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
+            modelBuilder.ApplyConfiguration(new WsClientResourceConfiguration());
             //FixSnakeCaseNames(modelBuilder); <- longer version
             SetSnakeCase(modelBuilder);
         }
