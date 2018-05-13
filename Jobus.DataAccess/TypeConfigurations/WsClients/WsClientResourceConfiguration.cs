@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Jobus.DataAccess.TypeConfigurations
+namespace Jobus.DataAccess.TypeConfigurations.WsClients
 {
     public class WsClientResourceConfiguration : IEntityTypeConfiguration<WsClientResource>
     {

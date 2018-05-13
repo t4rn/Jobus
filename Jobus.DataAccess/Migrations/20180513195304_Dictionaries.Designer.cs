@@ -11,9 +11,10 @@ using System;
 namespace Jobus.DataAccess.Migrations
 {
     [DbContext(typeof(JobusDbContext))]
-    partial class JobusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180513195304_Dictionaries")]
+    partial class Dictionaries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

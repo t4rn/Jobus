@@ -1,5 +1,7 @@
 ﻿using Jobus.Common.Extensions;
 using Jobus.DataAccess.TypeConfigurations;
+using Jobus.DataAccess.TypeConfigurations.Dictionaries;
+using Jobus.DataAccess.TypeConfigurations.WsClients;
 using Jobus.Domain.Jobs;
 using Jobus.Domain.WsClients;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +22,7 @@ namespace Jobus.DataAccess.Contexts
         public DbSet<WsClient> WsClients { get; set; }
         public DbSet<JobStatus> JobStatuses { get; set; }
         public DbSet<JobType> JobTypes { get; set; }
-        public DbSet<Job> Jobs { get; set; }
+        //public DbSet<Job> Jobs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +31,12 @@ namespace Jobus.DataAccess.Contexts
             modelBuilder.ApplyConfiguration(new WsClientConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new WsClientResourceConfiguration());
+
+            modelBuilder.ApplyConfiguration(new JobStatusConfiguration());
+            modelBuilder.ApplyConfiguration(new JobTypeConfiguration());
+
+            //modelBuilder.ApplyConfiguration(new JobConfiguration());
+            //modelBuilder.ApplyConfiguration(new JobQueueConfiguration());
             //FixSnakeCaseNames(modelBuilder); <- longer version
             SetSnakeCase(modelBuilder);
         }

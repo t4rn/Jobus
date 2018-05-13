@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Jobus.DataAccess.TypeConfigurations.Dictionaries
 {
-    public class DictionaryConfiguration : IEntityTypeConfiguration<DictionaryItem>
+    public class BaseDictionaryConfiguration<T> : IEntityTypeConfiguration<T> where T : DictionaryItem
     {
-        public void Configure(EntityTypeBuilder<DictionaryItem> builder)
+        public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.HasKey(x => x.Code);
 
