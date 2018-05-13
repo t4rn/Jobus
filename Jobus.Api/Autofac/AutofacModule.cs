@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using Jobus.Core.Repositories.WsClients;
 using Jobus.Core.Services.Cache;
 using Jobus.Core.Services.WsClients;
+using Jobus.DataAccess.Repositories;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Jobus.Api.Autofac

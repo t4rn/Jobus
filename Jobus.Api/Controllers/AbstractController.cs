@@ -1,5 +1,6 @@
 ﻿using Jobus.Core.Services.WsClients;
 using Jobus.Domain;
+using Jobus.Domain.WsClients;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;

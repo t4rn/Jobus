@@ -1,5 +1,6 @@
 ﻿using Jobus.Common.Results;
 using Jobus.Domain;
+using Jobus.Domain.WsClients;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,11 +1,11 @@
-﻿using Jobus.Core.Repositories.Contexts;
-using Jobus.Domain;
+﻿using Jobus.DataAccess.Contexts;
+using Jobus.Domain.WsClients;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jobus.Core.Repositories.WsClients
+namespace Jobus.DataAccess.Repositories
 {
     public class WsClientRepository : IWsClientRepository
     {

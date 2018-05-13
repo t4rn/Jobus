@@ -1,8 +1,8 @@
-﻿using Jobus.Domain;
+﻿using Jobus.Domain.WsClients;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Jobus.Core.Repositories.Contexts.TypeConfigurations
+namespace Jobus.DataAccess.TypeConfigurations
 {
     public class WsClientConfiguration : IEntityTypeConfiguration<WsClient>
     {

@@ -2,7 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Jobus.Api.Autofac;
 using Jobus.Api.Middleware;
-using Jobus.Core.Repositories.Contexts;
+using Jobus.DataAccess.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

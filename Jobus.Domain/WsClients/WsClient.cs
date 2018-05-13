@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jobus.Domain
+namespace Jobus.Domain.WsClients
 {
     public class WsClient
     {

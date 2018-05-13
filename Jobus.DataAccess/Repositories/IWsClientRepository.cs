@@ -1,8 +1,8 @@
-﻿using Jobus.Domain;
+﻿using Jobus.Domain.WsClients;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Jobus.Core.Repositories.WsClients
+namespace Jobus.DataAccess.Repositories
 {
     public interface IWsClientRepository
     {

@@ -1,13 +1,13 @@
 ﻿using Jobus.Common.Extensions;
-using Jobus.Core.Repositories.Contexts.TypeConfigurations;
-using Jobus.Domain;
+using Jobus.DataAccess.TypeConfigurations;
+using Jobus.Domain.WsClients;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Npgsql;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Jobus.Core.Repositories.Contexts
+namespace Jobus.DataAccess.Contexts
 {
     public class JobusDbContext : DbContext
     {
@@ -23,7 +23,7 @@ namespace Jobus.Core.Repositories.Contexts
         {
             modelBuilder.HasDefaultSchema("jobus");
             modelBuilder.ApplyConfiguration(new WsClientConfiguration());
-            //FixSnakeCaseNames(modelBuilder);
+            //FixSnakeCaseNames(modelBuilder); <- longer version
             SetSnakeCase(modelBuilder);
         }
 
