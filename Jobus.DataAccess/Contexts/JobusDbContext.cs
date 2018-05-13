@@ -1,5 +1,6 @@
 ﻿using Jobus.Common.Extensions;
 using Jobus.DataAccess.TypeConfigurations;
+using Jobus.Domain.Jobs;
 using Jobus.Domain.WsClients;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -17,6 +18,9 @@ namespace Jobus.DataAccess.Contexts
         }
 
         public DbSet<WsClient> WsClients { get; set; }
+        public DbSet<JobStatus> JobStatuses { get; set; }
+        public DbSet<JobType> JobTypes { get; set; }
+        public DbSet<Job> Jobs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
