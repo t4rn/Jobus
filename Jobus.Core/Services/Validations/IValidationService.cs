@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Jobus.Core.Services.Validations
 {
-    public interface IValidationService
+    public interface IValidationService : IService
     {
         Task<Result> ValidateAsync<T>(T entity);
     }

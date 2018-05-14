@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jobus.DataAccess.Repositories
+namespace Jobus.DataAccess.Repositories.WsClients
 {
     public class WsClientRepository : IWsClientRepository
     {

@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Jobus.Api.Autofac;
 using Jobus.Api.Filters;
+using Jobus.Api.IoC;
 using Jobus.Api.Middleware;
 using Jobus.DataAccess.Contexts;
 using Microsoft.AspNetCore.Builder;
@@ -53,7 +53,7 @@ namespace Jobus.Api
             // Autofac
             var builder = new ContainerBuilder();
             builder.Populate(services);
-            builder.RegisterModule(new AutofacModule());
+            builder.RegisterModule(new ApiModule());
             ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
@@ -75,6 +75,7 @@ namespace Jobus.Api
 
             //app.UseMiddleware<HashAuthorizationMiddleware>();
             app.UseMiddleware<LogRequestResponseMiddleware>();
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseMvc();
         }

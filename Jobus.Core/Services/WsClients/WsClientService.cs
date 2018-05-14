@@ -1,6 +1,6 @@
 ﻿using Jobus.Common.Results;
 using Jobus.Core.Services.Cache;
-using Jobus.DataAccess.Repositories;
+using Jobus.DataAccess.Repositories.WsClients;
 using Jobus.Domain.WsClients;
 using System;
 using System.Collections.Generic;

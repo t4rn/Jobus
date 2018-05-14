@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jobus.Core.Services.WsClients
 {
-    public interface IWsClientService
+    public interface IWsClientService : IService
     {
         Task<IEnumerable<WsClient>> GetWsClientsAsync(bool includeGhosts = false);
         Task<Result> AuthorizeAsync(string hash, string controllerName, string actionName);
