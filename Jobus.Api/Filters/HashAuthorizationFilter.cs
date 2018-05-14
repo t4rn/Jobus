@@ -24,6 +24,8 @@ namespace Jobus.Api.Filters
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+            string ip = context?.HttpContext?.Connection?.RemoteIpAddress?.ToString();
+
             try
             {
                 var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
@@ -34,10 +36,10 @@ namespace Jobus.Api.Filters
                 if (string.IsNullOrWhiteSpace(hashFromHeader))
                 {
                     // no authorization header
-                    _logger.LogDebug($"No hash provided...");
+                    _logger.LogDebug($"No hash provided from ip '{ip}'...");
                     context.Result = new ContentResult()
                     {
-                        Content = $"No Hash provided.",
+                        Content = $"No Hash provided from ip '{ip}'.",
                         StatusCode = StatusCodes.Status401Unauthorized,
                     };
                 }
@@ -48,7 +50,7 @@ namespace Jobus.Api.Filters
 
                     if (!validationResult.IsOk)
                     {
-                        _logger.LogDebug($"Auth failed -> {validationResult.Message}");
+                        _logger.LogDebug($"Auth failed from ip '{ip}' -> {validationResult.Message}");
                         context.Result = new ContentResult()
                         {
                             Content = validationResult.Message,
@@ -62,7 +64,7 @@ namespace Jobus.Api.Filters
                 _logger.LogError($"[OnAuthorizationAsync] Ex: {ex}");
                 context.Result = new ContentResult()
                 {
-                    Content = $"Exception occured: {ex.GetBaseException().Message}.",
+                    Content = $"Exception occured from ip '{ip}': {ex.GetBaseException().Message}.",
                     StatusCode = StatusCodes.Status503ServiceUnavailable,
                 };
             }

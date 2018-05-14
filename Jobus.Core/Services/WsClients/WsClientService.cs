@@ -48,6 +48,7 @@ namespace Jobus.Core.Services.WsClients
             {
                 result.Message = $"Incorrect hash '{hash}'.";
             }
+            // TODO: check, if it's ADMIN -> allow all
             else if (!foundWsClient.ClientsResources.Any(cr =>
                 cr.Resource.Controller.Equals(controllerName, StringComparison.InvariantCultureIgnoreCase) &&
                 cr.Resource.Action.Equals(actionName, StringComparison.InvariantCultureIgnoreCase)))
