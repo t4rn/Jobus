@@ -21,6 +21,6 @@ namespace Jobus.Domain.Jobs
 
         public DateTime? OutputDate { get; set; }
 
-        public JobQueue QueueInfo { get; set; }
+        public JobQueue JobQueue { get; set; }
     }
 }

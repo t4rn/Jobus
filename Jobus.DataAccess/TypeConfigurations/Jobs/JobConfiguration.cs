@@ -19,11 +19,11 @@ namespace Jobus.DataAccess.TypeConfigurations.Jobs
             builder.HasOne(x => x.WsClient)
                 .WithMany(ws => ws.Jobs);
 
-            builder.Property(x => x.TypeCode).HasMaxLength(8);
+            builder.Property(x => x.TypeCode).IsRequired().HasMaxLength(8).HasColumnName("job_type");
             builder.HasOne(x => x.Type)
                 .WithMany(jt => jt.Jobs);
 
-            builder.HasOne(x => x.QueueInfo)
+            builder.HasOne(x => x.JobQueue)
                 .WithOne(qi => qi.Job)
                 .HasForeignKey<JobQueue>(qi => qi.JobId);
         }
