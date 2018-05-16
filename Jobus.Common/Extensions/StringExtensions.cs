@@ -36,6 +36,11 @@ namespace Jobus.Common.Extensions
             return startUnderscores + Regex.Replace(input, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
         }
 
+        public static string CleanWhiteSpaces(this string str)
+        {
+            return Regex.Replace(str, @"\s+", "");
+        }
+
         public static object Deserialize<T>(this string instance, SerializeFormat format = SerializeFormat.Json)
         {
             switch (format)
