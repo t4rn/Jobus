@@ -28,12 +28,20 @@ namespace Jobus.Common.Extensions
             return str.Length >= from && str.Length <= to;
         }
 
-        public static string ToSnakeCase(this string input)
+        public static string ToSnakeCase(this string str)
         {
-            if (string.IsNullOrEmpty(input)) { return input; }
+            if (string.IsNullOrEmpty(str)) { return str; }
 
-            var startUnderscores = Regex.Match(input, @"^_+");
-            return startUnderscores + Regex.Replace(input, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
+            var startUnderscores = Regex.Match(str, @"^_+");
+            return startUnderscores + Regex.Replace(str, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
+        }
+
+        public static string ToCamelCase(this string str)
+        {
+            if (str == null || str.Length < 2)
+                return str;
+
+            return Char.ToLowerInvariant(str[0]) + str.Substring(1);
         }
 
         public static string CleanWhiteSpaces(this string str)
