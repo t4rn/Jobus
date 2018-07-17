@@ -49,17 +49,17 @@ namespace Jobus.Common.Extensions
             return Regex.Replace(str, @"\s+", "");
         }
 
-        public static object Deserialize<T>(this string instance, SerializeFormat format = SerializeFormat.Json)
+        public static T Deserialize<T>(this string instance, SerializeFormat format = SerializeFormat.Json)
         {
             switch (format)
             {
                 case SerializeFormat.Json:
-                    return JsonConvert.DeserializeObject(instance);
+                    return JsonConvert.DeserializeObject<T>(instance);
 
                 case SerializeFormat.Xml:
                     var stringReader = new StringReader(instance);
                     var serializer = new XmlSerializer(typeof(T));
-                    return serializer.Deserialize(stringReader);
+                    return (T)serializer.Deserialize(stringReader);
 
                 default:
                     throw new NotImplementedException();
