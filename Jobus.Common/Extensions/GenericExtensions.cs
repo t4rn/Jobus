@@ -24,9 +24,11 @@ namespace Jobus.Common.Extensions
 
                     case SerializeFormat.Xml:
                         XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                        StringWriter textWriter = new StringWriter();
-                        xmlSerializer.Serialize(textWriter, instance);
-                        result = textWriter.ToString();
+                        using (StringWriter textWriter = new StringWriter())
+                        {
+                            xmlSerializer.Serialize(textWriter, instance);
+                            result = textWriter.ToString();
+                        }
                         break;
 
                     default:
