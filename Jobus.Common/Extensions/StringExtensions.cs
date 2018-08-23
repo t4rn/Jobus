@@ -57,9 +57,11 @@ namespace Jobus.Common.Extensions
                     return JsonConvert.DeserializeObject<T>(instance);
 
                 case SerializeFormat.Xml:
-                    var stringReader = new StringReader(instance);
-                    var serializer = new XmlSerializer(typeof(T));
-                    return (T)serializer.Deserialize(stringReader);
+                    using (var stringReader = new StringReader(instance))
+                    {
+                        var serializer = new XmlSerializer(typeof(T));
+                        return (T)serializer.Deserialize(stringReader);
+                    }
 
                 default:
                     throw new NotImplementedException();

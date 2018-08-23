@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Serilog;
+using Serilog.Core;
+using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
+using System;
 
 namespace Jobus.Core.Services.Loggers
 {

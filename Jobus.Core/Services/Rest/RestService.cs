@@ -1,5 +1,6 @@
 ﻿using Jobus.Common.Results;
 using Jobus.Core.Services.Loggers;
+using RestSharp;
 using System;
 
 namespace Jobus.Core.Services.Rest
@@ -29,7 +30,6 @@ namespace Jobus.Core.Services.Rest
             foreach (var header in _settings.Headers)
                 request.AddHeader(header.Name, header.Value);
 
-            InputDto body = PrepareInput(jobId, data.DecisionId.Value, data.AppNumber);
             request.AddBody(body);
 
             // ignore SSL errors
