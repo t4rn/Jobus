@@ -169,6 +169,45 @@ namespace Jobus.Common.Extensions
             return sum % 10 == 0 && sum != 0;
         }
 
+        public static DateTime? ExtractBirthDateFromPesel(this string pesel)
+        {
+            if (string.IsNullOrWhiteSpace(pesel) || pesel.Length != 11)
+                return null;
+
+            int century = Int32.Parse(pesel[2].ToString());
+            int decade = Int32.Parse(pesel.Substring(0, 2));
+            int month = Int32.Parse(pesel.Substring(2, 2));
+            int day = Int32.Parse(pesel.Substring(4, 2));
+            int year = 0;
+
+            if (century == 0 || century == 1)
+            {
+                year = 1900 + decade;
+            }
+            else if (century == 2 || century == 3)
+            {
+                year = 2000 + decade;
+                month = month - 20;
+            }
+            else if (century == 4 || century == 5)
+            {
+                year = 2100 + decade;
+                month = month - 40;
+            }
+            else if (century == 6 || century == 7)
+            {
+                year = 2200 + decade;
+                month = month - 60;
+            }
+            else
+            {
+                year = 1800 + decade;
+                month = month - 80;
+            }
+
+            return new DateTime(year, month, day);
+        }
+
         #endregion
 
         #region REGON
